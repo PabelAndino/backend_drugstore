@@ -15,14 +15,14 @@ class Medicine(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
     medical_type = models.CharField(max_length=255)
-    sell_price = models.CharField(max_length=255)
+    buy_price = models.CharField(max_length=255,default='0')
+    sell_price = models.CharField(max_length=255, default='0')
     c_gst = models.CharField(max_length=255)
     s_gst = models.CharField(max_length=255)
-    s_gst = models.CharField(max_length=255)
-    expire_date = models.DateTimeField()
+    expire_date = models.DateField()
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
     stock = models.IntegerField()
-    date_added = models.DateField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
 

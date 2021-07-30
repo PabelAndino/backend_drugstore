@@ -27,7 +27,7 @@ class MedicineSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
     def to_representation(self, instance):
-        response = super(MedicineSerializers, self).to_representation()
+        response = super().to_representation(instance)
         response['company'] = CompanySerializer(instance.company_id).data
         return response
 
@@ -37,10 +37,16 @@ class MedicalDetailSerailizers(serializers.ModelSerializer):
         model = MedicalDetail
         fields = '__all__'
 
-    def to_representation(self, instance):
-        response = super(MedicalDetailSerailizers, self).to_representation()
+    def to_representation(self, instance): # Muestra los detalles que incluye el foreing key medicine
+        response = super().to_representation(instance)
         response['medicine'] = MedicineSerializers(instance.medicine_id).data
         return response
+
+
+class MedicalDetailSimpleSerailizers(serializers.ModelSerializer):
+    class Meta:
+        model = MedicalDetail
+        fields = '__all__'
 
 
 class EmployeeSerializers(serializers.ModelSerializer):
@@ -61,7 +67,7 @@ class BillSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
     def to_representation(self, instance):
-        response = super(BillSerializers, self).to_representation()
+        response = super().to_representation(instance)
         response['custumer'] = CustomerSerializers(instance.custumer_id).data
         return response
 
@@ -78,7 +84,7 @@ class CompanyAccountSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
     def to_representation(self, instance):
-        response = super(CompanyAccountSerializers, self).to_representation()
+        response = super().to_representation(instance)
         response['company'] = CompanySerializer(instance.company_id).data
         return response
 
@@ -89,6 +95,6 @@ class EmployeeBankSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
     def to_representation(self, instance):
-        response = super(EmployeeBankSerializers, self).to_representation()
+        response = super().to_representation(instance)
         response['employee'] = EmployeeSerializers(instance.employee.id).data
         return response
